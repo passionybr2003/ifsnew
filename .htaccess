@@ -1,0 +1,8 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^bank-ifsc-code/([a-zA-Z-0-9-]+)/([a-zA-Z-0-9-]+)(/|\.html)$ bank-ifsc-code.php?bname=$1&branch=$2 [NC,L]
+RewriteRule ^(.*)\.html$ $1.php  [L]
+ErrorDocument 404 /index.php
+
