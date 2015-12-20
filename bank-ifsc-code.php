@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'classes/common_funs.php';
+require_once 'common/header.php'; 
 $cf = new Commonfuns();
+$db = new DbConnect();
 $serverName = $cf->constants('localhostName');
 $img_title = $bank_options = $nxt_links = ''; 
 
@@ -17,8 +18,6 @@ $body = 'test mail from smtp class';
 //$mail->send_mail();
 
 
-
-
 // End Testing Smtp mail
 
 
@@ -30,8 +29,8 @@ $ifscC_arr = explode("-",$ifscC);
 $ifscCode = $ifscC_arr[0]; 
  
 $qury = "select *  from ifsc_codes where ifsc_code like '%$ifscCode%'";
-$data  = mysql_query($qury);
-while($row = mysql_fetch_assoc($data))
+$data  = $db->qry_select($qury);
+foreach($data as $row) 
 {
         $state = $row['STATE'];
         $district = $row['DISTRICT'];
@@ -42,6 +41,7 @@ while($row = mysql_fetch_assoc($data))
         $micr_code = $row['micr_code'];
         $contact = $row['contact'];
 }
+
 $title = ucwords($bank_name)." / ".ucwords($ifscCode). "Branch IFSC Code";
 $disp_bank_name =  ucwords(str_replace("-"," ",$bank_name));
 $info = '
@@ -74,10 +74,10 @@ $_SESSION['meta_keywords'] = $meta_keywords = $m_bank_name.",".$m_branch_name." 
 
 $db_bank_name = str_replace("-", " ", $bank_name);
 $qry  = "select ic.*,b.bank_name from ifsc_codes ic LEFT JOIN bank_names b ON b.id = ic.bank_id WHERE b.bank_name like '%$db_bank_name%' and ic.CITY like '%$city%' order by ic.branch_name ASC";
-$nxt_recds = mysql_query($qry);
+$nxt_recds = $db->qry_select($qry);
 $nxt_links = '<div class="row"> <div class="col-md-4">';
 $i = 0; $j = $k = 1;
-while($r = mysql_fetch_assoc($nxt_recds) ){
+foreach($nxt_recds as $r ){
         $nxt_bank_name = strtolower(str_replace(" ","-",$r['bank_name']));
         
         $nxt_ifsc_code = strtolower(str_replace(" ","_",$r['ifsc_code']));
@@ -128,10 +128,7 @@ if(true || file_exists($img_title1) === false){
     imagedestroy($im);
 }	
 ?> 
-<?php 
-require_once 'common/header.php'; 
-
-?>
+ 
 <div id="more_links" class="row">
     <div class="col-lg-4 col-md-offset-4 ">
         <div id="info"> 

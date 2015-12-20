@@ -24,8 +24,17 @@ $(function(){
 			url: "get_data.php",
 			data : {bankId:bank_id},
 			success:function(r){
-				$('#state_id').html(r);
-                                $("#state_id").trigger("chosen:updated");
+                             if(window.location.pathname == '/quick-search.html' || window.location.pathname == '/quick-search.php'){
+                                    $('#branch_name').html(r);
+                                    $("#branch_name").trigger("chosen:updated");
+                                } else {
+                                    $('#state_id').html(r);
+                                    $("#state_id").trigger("chosen:updated");
+                                }
+                            
+                            
+                            
+				
 			}
 		});
 	});
@@ -66,7 +75,7 @@ $(function(){
 			url: "get_data.php",
 			data : {bankId:bank_id,stateId:state_id,disName : dis_name,cityName:city_name},
 			success:function(r){
-                                if(window.location.pathname == '/find-bank-address.php'){
+                                if(window.location.pathname == '/find-bank-address.html' || window.location.pathname == '/find-bank-address.php'){
                                     $('#ifsc_code').html(r);
                                     $("#ifsc_code").trigger("chosen:updated");
                                 } else {

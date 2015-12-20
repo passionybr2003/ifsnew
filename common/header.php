@@ -1,5 +1,7 @@
 <?php
     error_reporting(0);
+    require 'classes/common_funs.php';
+    $cf = new Commonfuns();
     require_once 'meta_file.php';
     $scriptName = $_SERVER['SCRIPT_NAME'];
     $fileName = basename($scriptName,'.php');
@@ -33,7 +35,7 @@
         <script src="/js/user_defined.js"></script>
     </head>
     <body>
-        <div class="container">
+        
            <div class="bs-component">
                   <nav class="navbar navbar-default">
                     <div class="container-fluid">
@@ -50,6 +52,7 @@
                         <ul class="nav navbar-nav">
                           <li class="<?php echo ($fileName == 'index') ? 'active' : '';?>"><a href="/index.html">Home <span class="sr-only">(current)</span></a></li>
                           <li class="<?php echo ($fileName == 'find-bank-address') ? 'active' : '';?>" ><a href="/find-bank-address.html">Find Bank Address</a></li>
+                          <li class="<?php echo ($fileName == 'quick-search') ? 'active' : '';?>" ><a href="/quick-search.html">Quick Search</a></li>
                           <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -71,5 +74,5 @@
                     </div>
                   </nav>
                 </div>
-     
+     <div class="container">
    

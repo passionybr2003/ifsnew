@@ -13,24 +13,17 @@ class Commonfuns {
     }
     
     public function dbparameters(){
+        $serverIp = '31.220.16.20';
         if($_SERVER['SERVER_NAME'] == 'localhost'){
-                define('DB_HOST','127.0.0.1');
-                define('DB_USER','root');
-                define('DB_PWD','');
-                define('DB_NAME','gmaps');
-                define('ROOT_IMG_PATH','c:/xampp/htdocs/gmaps');
-                define('SRC_IMG_PATH','/image_comp_files/src/');
-                define('DEST_IMG_PATH','/image_comp_files/dest/');
-                define('SITEMAP_PATH',$_SERVER['DOCUMENT_ROOT'].'sitemaps/');
+                    define('DB_HOST','127.0.0.1');
+                    define('DB_USER','root');
+                    define('DB_PWD','');
+                    define('DB_NAME','code');
         } else {
                 define('DB_HOST','127.0.0.1');
-                define('DB_USER','u162921388_raghu');
-                define('DB_PWD','Anemone$123$');
-                define('DB_NAME','u162921388_gmaps');
-                define('ROOT_IMG_PATH',$_SERVER['DOCUMENT_ROOT']);
-                define('SRC_IMG_PATH','/image_comp_files/src/');
-                define('DEST_IMG_PATH','/image_comp_files/dest/');
-                define('SITEMAP_PATH',$_SERVER['DOCUMENT_ROOT'].'/sitemaps/');
+                define('DB_USER','u131272043_ifsc');
+                define('DB_PWD','Camellias@123@');
+                define('DB_NAME','u131272043_codes');
         }
     }
     

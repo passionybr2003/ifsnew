@@ -1,18 +1,15 @@
 <?php 
 require_once 'common/header.php'; 
- 
-
-//print_r(http_get_request_headers());
-
+$db = new DbConnect();
 require_once 'classes/dbConnection.php';
 $sql = "SELECT *  FROM bank_names order by bank_name ASC";
-$rs = mysql_query($sql);
+$rs = $db->qry_select($sql);
 if(isset($_SERVER['REQUEST_URI'])){
         $url = $_SERVER['REQUEST_URI'];
         $slash_pos = explode("/",$url);
 }
 $bank_options = '';        
-while($row = mysql_fetch_assoc($rs)) {
+foreach($rs as $row) {
 	$id = $row['id'];
 	$bank_name = $row['bank_name'];
 	$url_param = str_replace("_"," ",$slash_pos[2]);
@@ -31,7 +28,7 @@ while($row = mysql_fetch_assoc($rs)) {
     <form class="form-horizontal">
         <div class="form-group">
             <div class="col-lg-10">
-                <select id="bank_id" name="bank_id" class="bank_name input-lg">
+                <select id="bank_id" name="bank_id" class="bank_name">
 				<option>Select Bank</option>
 				<?php echo $bank_options?>
                 </select>
